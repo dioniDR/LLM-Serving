@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: llm-serving
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./models:/app/models
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1

@@ -23,15 +23,37 @@ LLM-Serving es una API REST minimalista diseñada para cargar y consultar modelo
 
 ## 🔧 Instalación
 
+### Opción 1: Usando Docker (recomendado)
+
 1. Clonar el repositorio:
 ```bash
 git clone https://github.com/tu-usuario/llm-serving.git
 cd llm-serving
 ```
 
-2. Instalar dependencias:
+2. Iniciar con Docker Compose:
 ```bash
-pip install -r requirements.txt
+docker-compose up -d
+```
+
+O usar el script incluido:
+```bash
+chmod +x docker-start.sh
+./docker-start.sh
+```
+
+### Opción 2: Instalación local
+
+1. Clonar el repositorio:
+```bash
+git clone https://github.com/tu-usuario/llm-serving.git
+cd llm-serving
+```
+
+2. Ejecutar el script de configuración:
+```bash
+chmod +x setup.sh
+./setup.sh
 ```
 
 3. Configurar modelos en `model_config.json`:
@@ -47,20 +69,27 @@ pip install -r requirements.txt
 
 ### Iniciar el servidor
 
+Con Docker:
 ```bash
+docker-compose up -d
+```
+
+Sin Docker:
+```bash
+source venv/bin/activate  # Si usas entorno virtual
 uvicorn main:app --reload
 ```
 
 ### Listar modelos disponibles
 
 ```bash
-curl http://localhost:8000/models
+curl http://localhost:8001/models
 ```
 
 ### Consultar un modelo
 
 ```bash
-curl "http://localhost:8000/query/mistral-7b?prompt=Explica la teoría de la relatividad"
+curl "http://localhost:8001/query/mistral-7b?prompt=Explica la teoría de la relatividad"
 ```
 
 ### Modo de simulación
@@ -81,7 +110,7 @@ touch models/fake_model.txt
 
 3. Consultar el modelo simulado:
 ```bash
-curl "http://localhost:8000/query/fake_model?prompt=Hola"
+curl "http://localhost:8001/query/fake_model?prompt=Hola"
 ```
 
 ## 🛠️ Estructura del proyecto
@@ -95,7 +124,11 @@ llm-serving/
 ├── models/                # Directorio para almacenar modelos
 │   ├── fake_model.txt     # Modelo de prueba
 │   └── ...                # Otros modelos
-└── requirements.txt       # Dependencias
+├── requirements.txt       # Dependencias
+├── Dockerfile             # Configuración para construir la imagen Docker
+├── docker-compose.yml     # Configuración para Docker Compose
+├── docker-start.sh        # Script para iniciar con Docker
+└── setup.sh               # Script para configuración local
 ```
 
 ## 📝 Planes futuros
