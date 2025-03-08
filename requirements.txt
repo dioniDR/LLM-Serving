@@ -1,3 +1,13 @@
 fastapi==0.110.0
 uvicorn==0.28.0
 pydantic==2.6.1
+transformers>=4.35.0
+onnxruntime>=1.16.0
+numpy>=1.22.0
+huggingface_hub>=0.17.0
+torch>=2.0.0
+transformers>=4.35.0
+accelerate>=0.25.0
+onnxruntime>=1.16.0
+numpy>=1.22.0
+huggingface_hub>=0.17.0

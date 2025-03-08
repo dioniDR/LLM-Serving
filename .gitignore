@@ -5,6 +5,15 @@ models/*
 # Excepciones para modelos fake
 !models/fake_model.txt
 
+# Archivos específicos de modelos grandes
+*.onnx
+*.onnx_data
+*.bin
+*.pt
+*.pth
+*.gguf
+*.ggml
+
 # Archivos de Python
 __pycache__/
 *.py[cod]

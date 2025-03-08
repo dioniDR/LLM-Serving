@@ -1,3 +1,5 @@
 {
-  "fake_model": "models/fake_model.txt"
+  "fake_model": "models/fake_model.txt",
+  "phi-2": "microsoft/phi-2",
+  "phi-1.5-onnx": "models/phi-1.5-onnx/model.onnx"
 }

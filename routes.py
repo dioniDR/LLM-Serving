@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from model_manager import get_model_path, list_available_models
+from model_manager import get_model_path, list_available_models, inference
 
 router = APIRouter()
 
@@ -11,16 +11,16 @@ def get_available_models():
 
 @router.get("/query/{model_name}")
 def query_model(model_name: str, prompt: str):
-    """Consulta el modelo especificado (simulado si no hay modelo real)."""
+    """Consulta el modelo especificado."""
     model_path = get_model_path(model_name)
     
     if not model_path:
         raise HTTPException(status_code=404, detail=f"Modelo '{model_name}' no encontrado")
 
-    # Simulación de respuesta sin modelo real
-    response = f"Simulación: '{prompt}' procesado por {model_name}"
+    # Realizar inferencia con el modelo
+    response = inference(model_name, prompt)
     
-    # En el futuro, aquí se implementará la llamada real al modelo:
-    # response = load_and_inference(model_path, prompt)
+    if response is None:
+        raise HTTPException(status_code=500, detail=f"Error al procesar la consulta con el modelo '{model_name}'")
     
     return {"model": model_name, "response": response}
